@@ -1675,4 +1675,293 @@
   }
 }
 
-  
+
+/* Tombol Dark Mode */
+.theme-toggle {
+  margin-left: 12px;
+  padding: 10px 14px;
+  border: 1px solid #e3e5ef;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #5144c9;
+  font: 600 13px 'DM Sans', sans-serif;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.theme-toggle:hover {
+  background: #f0efff;
+}
+
+
+/* =========================
+   DARK MODE
+========================= */
+
+
+/* =========================
+   TASKFLOW — DARK MODE FINAL
+========================= */
+
+body.dark-mode {
+  background: #111827;
+  color: #e5e7eb;
+}
+
+/* Sidebar dan area utama */
+body.dark-mode .sidebar,
+body.dark-mode .main-content {
+  background-color: #111827;
+  color: #e5e7eb;
+}
+
+/* Teks navigasi sidebar */
+body.dark-mode .sidebar-label,
+body.dark-mode .nav-item,
+body.dark-mode .sidebar-footer,
+body.dark-mode .breadcrumb,
+body.dark-mode .breadcrumb strong {
+  color: #cbd5e1;
+}
+
+body.dark-mode .nav-item:hover,
+body.dark-mode .nav-item.active {
+  background-color: #292447;
+  color: #c4b5fd;
+}
+
+/* Kartu dashboard */
+body.dark-mode .stat-card,
+body.dark-mode .progress-card,
+body.dark-mode .add-task-card,
+body.dark-mode .task-toolbar,
+body.dark-mode .task-card,
+body.dark-mode .empty-state {
+  background-color: #1f2937;
+  color: #e5e7eb;
+  border-color: #374151;
+}
+
+/* Kartu tip di sidebar */
+body.dark-mode .sidebar-tip {
+  background: linear-gradient(145deg, #252044, #1f2937);
+  border-color: #37305e;
+  color: #e5e7eb;
+}
+
+/* Judul dan teks kartu */
+body.dark-mode .stat-card h2,
+body.dark-mode .stat-card h3,
+body.dark-mode .stat-value,
+body.dark-mode .progress-card h2,
+body.dark-mode .add-task-card h3,
+body.dark-mode .task-toolbar h3,
+body.dark-mode .task-card h3,
+body.dark-mode .empty-state h3,
+body.dark-mode .sidebar-tip h3 {
+  color: #f9fafb;
+}
+
+/* Teks pendukung */
+body.dark-mode .stat-caption,
+body.dark-mode .progress-bottom,
+body.dark-mode .card-heading p,
+body.dark-mode .section-heading p,
+body.dark-mode .toolbar-copy span,
+body.dark-mode .sidebar-tip p,
+body.dark-mode .page-footer {
+  color: #cbd5e1;
+}
+
+/* Form, pencarian, filter, dan sorting */
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+  background-color: #111827;
+  color: #f9fafb;
+  border-color: #4b5563;
+}
+
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+  color: #9ca3af;
+}
+
+body.dark-mode .form-field label,
+body.dark-mode .form-hint {
+  color: #d1d5db;
+}
+
+/* Progress bar */
+body.dark-mode .progress-track {
+  background-color: #374151;
+}
+
+body.dark-mode .progress-pill {
+  background-color: #312e61;
+  color: #ddd6fe;
+}
+
+/* Hero tetap mempertahankan gradasi ungu */
+body.dark-mode .welcome-section {
+  background: linear-gradient(120deg, #30265f, #6554d9);
+}
+
+/* Profil dan tombol tema */
+body.dark-mode .profile-info strong {
+  color: #f9fafb;
+}
+
+body.dark-mode .profile-info span {
+  color: #cbd5e1;
+}
+
+body.dark-mode .theme-toggle {
+  background-color: #374151;
+  color: #f9fafb;
+  border-color: #4b5563;
+}
+
+body.dark-mode .theme-toggle:hover {
+  background-color: #4b5563;
+}
+
+/* Modal edit */
+body.dark-mode .modal-panel {
+  background-color: #1f2937;
+  color: #e5e7eb;
+  border-color: #374151;
+}
+
+body.dark-mode .modal-panel h2,
+body.dark-mode .modal-panel h3,
+body.dark-mode .modal-panel label {
+  color: #f9fafb;
+}
+
+body.dark-mode .modal-description {
+  color: #cbd5e1;
+}
+
+body.dark-mode .close-modal,
+body.dark-mode .cancel-button {
+  background-color: #374151;
+  color: #f9fafb;
+  border-color: #4b5563;
+}
+
+/* Batas dan garis pemisah */
+body.dark-mode .topbar,
+body.dark-mode .section-heading {
+  border-color: #374151;
+}
+
+/* Pesan error tetap terlihat */
+body.dark-mode .error {
+  color: #fca5a5;
+}
+
+/* Transisi warna */
+body,
+body * {
+  transition-property: background-color, border-color, color;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+}
+
+
+/* FIX: TASK CARDS IN DARK MODE */
+
+body.dark-mode .task-list .task-card,
+body.dark-mode .task-list > div {
+  background: #1f2937;
+  color: #e5e7eb;
+  border-color: #374151;
+}
+
+body.dark-mode .task-list h3,
+body.dark-mode .task-list h4,
+body.dark-mode .task-list strong,
+body.dark-mode .task-list p,
+body.dark-mode .task-list span {
+  color: #e5e7eb;
+}
+
+body.dark-mode .task-list button {
+  color: #e5e7eb;
+}
+
+body.dark-mode .task-list button:not(.add-task-button) {
+  background-color: #374151;
+  border-color: #4b5563;
+}
+
+body.dark-mode .task-list button:hover {
+  background-color: #4b5563;
+}
+
+
+/* ==================================
+   DARK MODE — FINAL VISUAL FIX
+================================== */
+
+/* Area pencarian, filter, dan sorting */
+body.dark-mode .task-toolbar {
+  background: #111827 !important;
+  color: #f9fafb !important;
+  border-color: #374151 !important;
+}
+
+body.dark-mode .search-box {
+  background: #1f2937 !important;
+  border-color: #374151 !important;
+}
+
+body.dark-mode .search-box input {
+  background: transparent !important;
+  color: #f9fafb !important;
+}
+
+/* Kartu tugas yang dirender JavaScript */
+body.dark-mode #task-list > * {
+  background-color: #1f2937 !important;
+  color: #e5e7eb !important;
+  border-color: #374151 !important;
+}
+
+/* Teks di dalam kartu tugas */
+body.dark-mode #task-list > * h3,
+body.dark-mode #task-list > * h4,
+body.dark-mode #task-list > * p,
+body.dark-mode #task-list > * span,
+body.dark-mode #task-list > * strong {
+  color: #e5e7eb !important;
+}
+
+/* Input dan dropdown */
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+  background-color: #111827;
+  color: #f9fafb;
+  border-color: #4b5563;
+}
+
+body.dark-mode input::placeholder {
+  color: #9ca3af;
+}
+
+/* Jaga agar tombol aksi tetap terbaca */
+body.dark-mode #task-list button {
+  color: #f9fafb;
+}
+
+/* Kartu progres dan form */
+body.dark-mode .progress-card,
+body.dark-mode .add-task-card,
+body.dark-mode .stat-card {
+  background-color: #1f2937;
+  color: #e5e7eb;
+  border-color: #374151;
+}

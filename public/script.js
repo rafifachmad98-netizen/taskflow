@@ -754,3 +754,48 @@ async function startTaskFlow() {
 }
 
 startTaskFlow();
+
+
+/* =========================
+   DARK MODE
+========================= */
+
+
+/* =========================
+   DARK MODE — FINAL
+========================= */
+
+
+/* =========================
+   DARK MODE — TASKFLOW
+========================= */
+
+const themeToggle = document.getElementById("theme-toggle");
+
+function applyTheme(theme) {
+  const isDark = theme === "dark";
+
+  document.body.classList.toggle("dark-mode", isDark);
+
+  if (themeToggle) {
+    themeToggle.textContent = isDark
+      ? "☀️ Light Mode"
+      : "🌙 Dark Mode";
+
+    themeToggle.setAttribute("aria-pressed", String(isDark));
+  }
+}
+
+// Ambil tema yang tersimpan.
+const savedTheme = localStorage.getItem("taskflow-theme");
+applyTheme(savedTheme === "dark" ? "dark" : "light");
+
+// Ganti tema ketika tombol diklik.
+themeToggle?.addEventListener("click", () => {
+  const nextTheme = document.body.classList.contains("dark-mode")
+    ? "light"
+    : "dark";
+
+  localStorage.setItem("taskflow-theme", nextTheme);
+  applyTheme(nextTheme);
+});
