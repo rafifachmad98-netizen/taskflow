@@ -1,0 +1,410 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f6f7fb">
+  <title>Login — TaskFlow</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background: #f6f7fb;
+      color: #17213d;
+      font-family: "DM Sans", sans-serif;
+    }
+
+    .auth-card {
+      width: 100%;
+      max-width: 440px;
+      padding: 36px;
+      background: white;
+      border: 1px solid #e8eaf3;
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(32, 38, 75, .07);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      margin-bottom: 32px;
+      font: 800 25px "Plus Jakarta Sans", sans-serif;
+      color: #202847;
+      text-decoration: none;
+    }
+
+    .brand-icon {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      background: #6857ed;
+      color: white;
+      font-size: 25px;
+    }
+
+    .brand-accent { color: #6857ed; }
+
+    h1 {
+      margin: 0 0 8px;
+      font: 800 27px "Plus Jakarta Sans", sans-serif;
+    }
+
+    .subtitle {
+      margin: 0 0 26px;
+      color: #8189a2;
+      line-height: 1.6;
+    }
+
+    .field { margin-bottom: 18px; }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #e0e3ef;
+      border-radius: 12px;
+      background: #fbfbfe;
+      color: #17213d;
+      font: inherit;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #6857ed;
+      box-shadow: 0 0 0 3px rgba(104, 87, 237, .12);
+    }
+
+    .submit {
+      width: 100%;
+      margin-top: 8px;
+      padding: 15px;
+      border: 0;
+      border-radius: 12px;
+      background: #6857ed;
+      color: white;
+      font: 700 15px "DM Sans", sans-serif;
+      cursor: pointer;
+    }
+
+    .submit:disabled {
+      opacity: .65;
+      cursor: wait;
+    }
+
+    .switch {
+      margin: 22px 0 0;
+      text-align: center;
+      color: #8189a2;
+      font-size: 14px;
+    }
+
+    .switch button {
+      border: 0;
+      background: none;
+      color: #6857ed;
+      font: 700 14px "DM Sans", sans-serif;
+      cursor: pointer;
+    }
+
+    .message {
+      margin: 16px 0 0;
+      color: #e54861;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .message.success { color: #16845b; }
+
+    [hidden] { display: none !important; }
+
+    @media (max-width: 480px) {
+      .auth-card { padding: 26px 21px; }
+      h1 { font-size: 24px; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="auth-card">
+    <a class="brand" href="/login.html">
+      <span class="brand-icon">✓</span>
+      <span>task<span class="brand-accent">flow</span></span>
+    </a>
+
+    <h1 id="form-title">Selamat datang kembali!</h1>
+
+    <p class="subtitle" id="form-subtitle">
+      Login untuk melanjutkan produktivitasmu.
+    </p>
+
+    <form id="auth-form">
+      <div class="field" id="name-field" hidden>
+        <label for="name">Nama</label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          maxlength="80"
+          autocomplete="name"
+        >
+      </div>
+
+      <div class="field">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          maxlength="254"
+          autocomplete="email"
+          required
+        >
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          minlength="8"
+          maxlength="72"
+          autocomplete="current-password"
+          required
+        >
+      </div>
+
+      <button class="submit" id="submit-button" type="submit">
+        Login
+      </button>
+
+      <p class="message" id="message" role="alert" aria-live="polite"></p>
+    </form>
+
+    <p class="switch">
+      <span id="switch-copy">Belum punya akun?</span>
+      <button type="button" id="switch-button">Daftar sekarang</button>
+    </p>
+  </main>
+
+  <script>
+    const authForm = document.getElementById("auth-form");
+    const nameField = document.getElementById("name-field");
+    const nameInput = document.getElementById("name");
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const formTitle = document.getElementById("form-title");
+    const formSubtitle = document.getElementById("form-subtitle");
+    const submitButton = document.getElementById("submit-button");
+    const message = document.getElementById("message");
+    const switchCopy = document.getElementById("switch-copy");
+    const switchButton = document.getElementById("switch-button");
+
+    let mode = "login";
+    let csrfToken = "";
+
+    // Mengambil token baru dari server.
+    async function refreshCsrfToken(forceRefresh = false) {
+      const url = forceRefresh
+        ? "/api/csrf-token?refresh=1"
+        : "/api/csrf-token";
+
+      const response = await fetch(url, {
+        method: "GET",
+        credentials: "same-origin",
+        cache: "no-store",
+        headers: {
+          "Accept": "application/json"
+        }
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok || !data.csrfToken) {
+        throw new Error(
+          data.message || "Gagal mengambil token keamanan."
+        );
+      }
+
+      csrfToken = data.csrfToken;
+      return csrfToken;
+    }
+
+    // Mengirim request dengan token CSRF.
+    async function csrfFetch(url, options = {}) {
+      if (!csrfToken) {
+        await refreshCsrfToken();
+      }
+
+      async function sendRequest() {
+        const headers = new Headers(options.headers || {});
+        headers.set("x-csrf-token", csrfToken);
+
+        return fetch(url, {
+          ...options,
+          credentials: "same-origin",
+          headers
+        });
+      }
+
+      let response = await sendRequest();
+
+      // Jika token ditolak, ambil token baru dan coba sekali lagi.
+      if (response.status === 403) {
+  const errorData = await response.clone()
+    .json()
+    .catch(() => ({}));
+
+  if (
+    errorData.message &&
+    /csrf|token keamanan/i.test(errorData.message)
+  ) {
+    csrfToken = "";
+    await refreshCsrfToken(false);
+    response = await sendRequest();
+  }
+}
+
+      return response;
+    }
+
+    function setMode(nextMode) {
+      mode = nextMode;
+
+      const registering = mode === "register";
+
+      nameField.hidden = !registering;
+      nameInput.required = registering;
+
+      passwordInput.autocomplete = registering
+        ? "new-password"
+        : "current-password";
+
+      formTitle.textContent = registering
+        ? "Buat akun TaskFlow"
+        : "Selamat datang kembali!";
+
+      formSubtitle.textContent = registering
+        ? "Buat akun untuk mulai mengatur tugasmu."
+        : "Login untuk melanjutkan produktivitasmu.";
+
+      submitButton.textContent = registering
+        ? "Buat akun"
+        : "Login";
+
+      switchCopy.textContent = registering
+        ? "Sudah punya akun?"
+        : "Belum punya akun?";
+
+      switchButton.textContent = registering
+        ? "Login"
+        : "Daftar sekarang";
+
+      message.textContent = "";
+      message.className = "message";
+    }
+
+    switchButton.addEventListener("click", () => {
+      setMode(mode === "login" ? "register" : "login");
+    });
+
+    // Periksa apakah pengguna sudah login.
+    (async function checkExistingSession() {
+      try {
+        const response = await fetch("/api/me", {
+          credentials: "same-origin",
+          cache: "no-store"
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.user) {
+          window.location.replace("/");
+        }
+      } catch (error) {
+        console.error("Gagal memeriksa sesi:", error);
+      }
+    })();
+
+    // Proses login dan registrasi.
+    authForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      message.textContent = "";
+      message.className = "message";
+
+      submitButton.disabled = true;
+      submitButton.textContent = "Memproses...";
+
+      const payload = {
+        email: emailInput.value.trim(),
+        password: passwordInput.value
+      };
+
+      if (mode === "register") {
+        payload.name = nameInput.value.trim();
+      }
+
+      try {
+        const endpoint = mode === "register"
+          ? "/api/register"
+          : "/api/login";
+
+        const response = await csrfFetch(endpoint, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await response.json().catch(() => ({}));
+
+        if (!response.ok) {
+          throw new Error(
+            data.message || `Permintaan gagal (${response.status}).`
+          );
+        }
+
+        message.textContent = "Berhasil! Membuka dashboard...";
+        message.className = "message success";
+
+        window.location.replace("/");
+      } catch (error) {
+        console.error("Kesalahan autentikasi:", error);
+
+        message.textContent =
+          error.message || "Tidak bisa terhubung ke server.";
+
+        message.className = "message";
+      } finally {
+        submitButton.disabled = false;
+
+        submitButton.textContent = mode === "register"
+          ? "Buat akun"
+          : "Login";
+      }
+    });
+  </script>
+</body>
+</html>

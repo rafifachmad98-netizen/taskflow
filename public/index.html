@@ -1,0 +1,345 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f6f7fb">
+  <meta name="description" content="TaskFlow — atur tugas, kelola prioritas, dan capai target belajarmu.">
+
+  <title>TaskFlow — Personal Task Manager</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <div class="app-shell">
+
+    <aside class="sidebar">
+      <a href="#" class="brand" aria-label="TaskFlow beranda">
+        <span class="brand-icon">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M5 12.5L9.2 16.5L19 6.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span>task<span class="brand-accent">flow</span></span>
+      </a>
+
+      <div class="sidebar-label">WORKSPACE</div>
+
+      <nav class="sidebar-nav" aria-label="Navigasi utama">
+        <a href="#dashboard" class="nav-item active">
+          <span>▦</span>
+          <span>Dashboard</span>
+        </a>
+
+        <a href="#tasks-section" class="nav-item">
+          <span>☷</span>
+          <span>Semua tugas</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="sidebar-tip">
+          <div class="tip-icon">✦</div>
+          <h3>Small steps, big results.</h3>
+          <p>Selesaikan satu tugas hari ini. Kamu pasti bisa.</p>
+        </div>
+
+        <div class="sidebar-footer">
+          <span class="online-dot"></span>
+          <span>Personal workspace</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content" id="dashboard">
+
+      <header class="topbar">
+        <div class="breadcrumb">
+          <span>Workspace</span>
+          <span class="breadcrumb-separator">/</span>
+          <strong>Dashboard</strong>
+        </div>
+
+        <div class="profile">
+          <div class="profile-avatar">TF</div>
+          <div class="profile-info">
+            <strong>My Workspace</strong>
+            <span>Personal account</span>
+          </div>
+        </div>
+      </header>
+
+      <section class="welcome-section">
+        <div class="welcome-copy">
+          <span class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            YOUR PRODUCTIVITY SPACE
+          </span>
+
+          <h1>Make today <span>count.</span></h1>
+          <p>Atur prioritasmu, selesaikan tugasmu, dan terus berkembang setiap hari.</p>
+        </div>
+
+        <div class="welcome-decoration" aria-hidden="true">
+          <div class="decoration-circle circle-one"></div>
+          <div class="decoration-circle circle-two"></div>
+          <div class="decoration-card">
+            <span class="decoration-check">✓</span>
+            <div>
+              <strong>Stay focused</strong>
+              <span>One task at a time</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="stats-grid" aria-label="Ringkasan tugas">
+        <article class="stat-card">
+          <div class="stat-top">
+            <span class="stat-label">Total tugas</span>
+            <span class="stat-icon icon-purple">☷</span>
+          </div>
+          <p class="stat-value" id="total-tasks">—</p>
+          <p class="stat-caption">Tugas dalam daftar kamu</p>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-top">
+            <span class="stat-label">Tugas selesai</span>
+            <span class="stat-icon icon-green">✓</span>
+          </div>
+          <p class="stat-value" id="completed-tasks">—</p>
+          <p class="stat-caption">Langkah yang sudah tercapai</p>
+        </article>
+
+        <article class="stat-card progress-stat">
+          <div class="stat-top">
+            <span class="stat-label">Progress keseluruhan</span>
+            <span class="stat-icon icon-orange">↗</span>
+          </div>
+          <p class="stat-value" id="progress-percentage">0%</p>
+          <p class="stat-caption">Sedikit demi sedikit, makin dekat</p>
+        </article>
+      </section>
+
+      <section class="progress-card">
+        <div class="progress-heading">
+          <div>
+            <span class="section-kicker">YOUR MOMENTUM</span>
+            <h2>Perjalananmu sejauh ini</h2>
+          </div>
+          <span class="progress-pill" id="progress-text">0% progres belajar</span>
+        </div>
+
+        <div
+          class="progress-track"
+          role="progressbar"
+          aria-label="Progress penyelesaian tugas"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+          id="progress-track"
+        >
+          <div class="progress-fill" id="progress-bar"></div>
+        </div>
+
+        <div class="progress-bottom">
+          <span id="task-count">0 dari 0 tugas selesai</span>
+          <span>Keep going ✨</span>
+        </div>
+      </section>
+
+      <section class="tasks-section" id="tasks-section">
+        <div class="section-heading">
+          <div>
+            <span class="section-kicker">STAY ORGANIZED</span>
+            <h2>Daftar tugas <span class="heading-dot">.</span></h2>
+            <p>Semua yang ingin kamu selesaikan, di satu tempat.</p>
+          </div>
+
+          <span class="workspace-badge">
+            <span class="online-dot"></span>
+            My tasks
+          </span>
+        </div>
+
+        <section class="add-task-card">
+          <div class="card-heading">
+            <div class="card-heading-icon">＋</div>
+            <div>
+              <h3>Tambah tugas baru</h3>
+              <p>Mulai dengan satu langkah kecil.</p>
+            </div>
+          </div>
+
+          <form id="task-form">
+            <div class="form-field title-field">
+              <label for="task-input">Nama tugas</label>
+              <input
+                type="text"
+                id="task-input"
+                name="title"
+                placeholder="Contoh: Belajar JavaScript 30 menit"
+                maxlength="120"
+                required
+              >
+            </div>
+
+            <div class="form-row">
+              <div class="form-field">
+                <label for="task-priority">Prioritas</label>
+                <select id="task-priority" name="priority">
+                  <option value="low">Rendah</option>
+                  <option value="medium" selected>Menengah</option>
+                  <option value="high">Tinggi</option>
+                </select>
+              </div>
+
+              <div class="form-field">
+                <label for="task-due-date">
+                  Deadline <span class="optional-label">Opsional</span>
+                </label>
+                <input type="date" id="task-due-date" name="due_date">
+              </div>
+            </div>
+
+            <div class="form-submit-row">
+              <span class="form-hint">✦ Fokus pada progres, bukan kesempurnaan.</span>
+              <button type="submit" class="add-task-button">
+                <span>＋</span> Tambah tugas
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <div class="task-toolbar">
+          <div class="toolbar-copy">
+            <h3>Tugas kamu</h3>
+            <span>Kelola aktivitasmu</span>
+          </div>
+
+          <div class="toolbar-controls">
+            <label class="search-box" for="search-input">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M16 16L21 21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+
+              <input
+                type="search"
+                id="search-input"
+                placeholder="Cari tugas..."
+                aria-label="Cari tugas"
+              >
+            </label>
+
+            <label class="filter-box" for="task-filter">
+              <span class="sr-only">Filter tugas</span>
+              <select id="task-filter">
+                <option value="all">Semua tugas</option>
+                <option value="pending">Belum selesai</option>
+                <option value="completed">Selesai</option>
+              </select>
+            </label>
+
+            <!-- FITUR BARU: SORTING -->
+            <label class="sort-box" for="task-sort">
+              <span class="sr-only">Urutkan tugas</span>
+              <select id="task-sort">
+                <option value="newest">Terbaru</option>
+                <option value="priority">Prioritas tertinggi</option>
+                <option value="deadline">Deadline terdekat</option>
+                <option value="completed">Belum selesai dulu</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div id="task-list" class="task-list" aria-live="polite"></div>
+
+        <div id="empty-state" class="empty-state" hidden>
+          <div class="empty-icon">✦</div>
+          <h3>Belum ada tugas</h3>
+          <p>Tambahkan tugas pertamamu dan mulai bangun kebiasaan baik.</p>
+        </div>
+
+        <p id="error-message" class="error" role="alert"></p>
+      </section>
+
+      <footer class="page-footer">
+        <span>Made for your next big thing <span class="footer-heart">♥</span></span>
+        <span>TaskFlow <span class="footer-version">PERSONAL WORKSPACE</span></span>
+      </footer>
+    </main>
+  </div>
+
+  <!-- MODAL EDIT TUGAS -->
+  <div id="edit-modal" class="modal" hidden>
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+
+    <section
+      class="modal-panel"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="edit-modal-title"
+    >
+      <div class="modal-header">
+        <div>
+          <p class="eyebrow">TASK SETTINGS</p>
+          <h2 id="edit-modal-title">Edit tugas</h2>
+          <p class="modal-description">Sesuaikan detail tugasmu di sini.</p>
+        </div>
+
+        <button
+          type="button"
+          id="close-modal"
+          class="close-modal"
+          aria-label="Tutup"
+        >×</button>
+      </div>
+
+      <form id="edit-form">
+        <div class="form-field">
+          <label for="edit-title">Nama tugas</label>
+          <input type="text" id="edit-title" maxlength="120" required>
+        </div>
+
+        <div class="form-field">
+          <label for="edit-priority">Prioritas</label>
+          <select id="edit-priority">
+            <option value="low">Rendah</option>
+            <option value="medium">Menengah</option>
+            <option value="high">Tinggi</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label for="edit-due-date">
+            Deadline <span class="optional-label">Opsional</span>
+          </label>
+          <input type="date" id="edit-due-date">
+        </div>
+
+        <p id="edit-error" class="error" role="alert"></p>
+
+        <div class="modal-actions">
+          <button type="button" id="cancel-edit" class="cancel-button">
+            Batal
+          </button>
+
+          <button type="submit" class="add-task-button">
+            Simpan perubahan
+          </button>
+        </div>
+      </form>
+    </section>
+  </div>
+</body>
+</html>
