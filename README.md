@@ -69,8 +69,19 @@ taskflow/
 ```bash
 npm install
 ```
+4. Create a `.env` file in the project root directory and add the following environment variable:
 
-4. Configure the required environment variables.
+   ```env
+   SESSION_SECRET=your_generated_secret_here
+   ```
+
+   Generate a secure secret with Node.js:
+
+   ```bash
+   node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+   ```
+
+   Copy the generated value after `SESSION_SECRET=` in your `.env` file. Never commit your `.env` file to GitHub.
 5. Start the application:
 
 ```bash
