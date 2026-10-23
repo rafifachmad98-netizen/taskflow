@@ -1,41 +1,91 @@
-# TaskFlow — Task Management App
+# TaskFlow — Full-Stack Task Manager
 
-A full-stack task management application built with JavaScript, Node.js, Express, and SQLite.
+TaskFlow is a full-stack task management application built to practice and demonstrate front-end and back-end web development.
 
-TaskFlow allows users to manage their daily tasks through a web interface with authentication and account-specific task storage.
+Users can register, log in, manage personal tasks, set priorities and deadlines, track progress, and switch between light and dark themes.
 
 ## Features
 
-- User registration and login
-- Secure password hashing with bcrypt
-- Session-based authentication
-- Create, read, update, and delete tasks (CRUD)
-- Task isolation between user accounts
-- CSRF protection
-- Rate limiting for request protection
-- SQLite database for persistent storage
-- Session persistence using SQLite
-- Frontend built with HTML, CSS, and JavaScript
+- **Authentication:** User registration, login, and logout.
+- **Session management:** Persistent sessions using SQLite-backed storage.
+- **Task management:** Create, read, update, and delete tasks.
+- **Task organization:** Priorities, deadlines, search, filtering, and sorting.
+- **Dashboard:** Task progress tracking.
+- **Dark mode:** Theme preference saved in the browser.
+- **Security:** Password hashing, request validation, rate limiting, session protection, and CSRF protection.
+- **Automated testing:** Tests for authentication, task operations, access control, and user task isolation.
 
 ## Tech Stack
 
 **Frontend**
-- HTML5
-- CSS3
+- HTML
+- CSS
 - JavaScript
 
 **Backend**
 - Node.js
 - Express.js
-
-**Database and Security**
 - SQLite
+
+**Security and supporting libraries**
 - bcryptjs
 - express-session
 - connect-sqlite3
-- csrf-csrf
 - express-rate-limit
 - cookie-parser
+- csrf-csrf
+
+## Prerequisites
+
+Install Node.js and npm before running the application.
+
+## Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/rafifachmad98-netizen/taskflow.git
+   ```
+
+2. Open the project directory:
+
+   ```bash
+   cd taskflow
+   ```
+
+3. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+4. Create a `.env` file in the project root and add a strong session secret:
+
+   ```env
+   SESSION_SECRET=replace-with-your-own-random-secret
+   ```
+
+   Use a randomly generated secret of at least 32 characters. Never commit your real `.env` file to GitHub.
+
+5. Start the application:
+
+   ```bash
+   npm start
+   ```
+
+6. Open the application in your browser:
+
+   http://localhost:3000
+
+## Running Automated Tests
+
+Run the test suite with:
+
+```bash
+npm test
+```
+
+The automated tests cover registration, login, session handling, task CRUD operations, unauthenticated access restrictions, and task ownership isolation.
 
 ## Project Structure
 
@@ -46,74 +96,34 @@ taskflow/
 │   ├── login.html
 │   ├── script.js
 │   └── style.css
-├── server.js
+├── .gitignore
 ├── package.json
 ├── package-lock.json
-├── taskflow.db
-└── sessions.sqlite
+├── README.md
+├── server.js
+└── server.test.js
 ```
 
-## Getting Started
+The SQLite databases are created locally and should not be committed to the repository.
 
-### Prerequisites
+## Learning Goals
 
-- Node.js
-- npm
+This project was built to practice:
 
-### Installation
+- Building responsive web interfaces.
+- Working with JavaScript and DOM events.
+- Designing REST-style API endpoints.
+- Managing authentication and sessions.
+- Performing database operations with SQLite.
+- Applying basic web security protections.
+- Writing automated tests with Node.js.
 
-1. Clone this repository.
-2. Navigate to the project directory.
-3. Install dependencies:
+## Status
 
-```bash
-npm install
-```
-4. Create a `.env` file in the project root directory and add the following environment variable:
+The application and its current automated test suite are running locally. Development and testing are ongoing.
 
-   ```env
-   SESSION_SECRET=your_generated_secret_here
-   ```
+## Author
 
-   Generate a secure secret with Node.js:
+**Rafif Achmad**
 
-   ```bash
-   node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
-   ```
-
-   Copy the generated value after `SESSION_SECRET=` in your `.env` file. Never commit your `.env` file to GitHub.
-5. Start the application:
-
-```bash
-npm start
-```
-
-6. Open your browser and visit:
-
-```text
-http://localhost:3000
-```
-
-## Environment Variables
-
-Configure the environment variables required by the application before running it. Check `server.js` to identify the exact variable names and requirements.
-
-Do not commit secrets, session keys, or other sensitive configuration values to version control.
-
-## Security Notes
-
-TaskFlow uses password hashing, session-based authentication, CSRF protection, rate limiting, and account-specific task queries.
-
-Security testing should be completed before deploying the application publicly.
-
-## Future Improvements
-
-- Automated tests
-- Task search and filtering
-- Task deadlines and priorities
-- Improved responsive design
-- Production deployment
-
-## License
-
-This project is currently licensed under ISC as specified in `package.json`.
+GitHub: [@rafifachmad98-netizen](https://github.com/rafifachmad98-netizen)

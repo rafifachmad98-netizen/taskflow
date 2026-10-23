@@ -649,7 +649,15 @@ app.use((error, req, res, next) => {
   });
 });
 
-// 18. START SERVER
-app.listen(PORT, () => {
-  console.log(`TaskFlow berjalan di http://localhost:${PORT}`);
-});
+
+
+ // 18. START SERVER
+ if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`TaskFlow berjalan di http://localhost:${PORT}`);
+  });
+}
+
+// Export aplikasi untuk automated testing
+module.exports = app;
+
